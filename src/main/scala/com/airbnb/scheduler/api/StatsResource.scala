@@ -20,9 +20,9 @@ import scala.collection.JavaConversions._
  * Returns a list of jobs, sorted by percentile run times.
  */
 
-@Path(PathConstants.jobsPerformancePath)
+@Path(PathConstants.allStatsPath)
 @Produces(Array(MediaType.APPLICATION_JSON))
-class PerformanceResource @Inject()(
+class StatsResource @Inject()(
                                      val jobScheduler: JobScheduler,
                                      val jobGraph: JobGraph,
                                      val configuration: SchedulerConfiguration,
@@ -33,24 +33,22 @@ class PerformanceResource @Inject()(
   @Timed
   @GET
   // Valid arguments are
-  // /scheduler/perf/99thPercentile
-  // /scheduler/perf/98thPercentile
-  // /scheduler/perf/95thPercentile
-  // /scheduler/perf/75thPercentile
-  // /scheduler/perf/median
-  // /scheduler/perf/mean
+  // /scheduler/stats/99thPercentile
+  // /scheduler/stats/98thPercentile
+  // /scheduler/stats/95thPercentile
+  // /scheduler/stats/75thPercentile
+  // /scheduler/stats/median
+  // /scheduler/stats/mean
   def getPerf(@PathParam("percentile") percentile: String): Response = {
     try {
       var jobs = ListBuffer[(String, Double)]()
       val mapper = new ObjectMapper()
       for (jobNameString <- jobGraph.dag.vertexSet()) {
         val node = mapper.readTree(jobMetrics.getJsonStats(jobNameString))
-        val time =
-          if (node.has(percentile) && node.get(percentile) != null)
-            node.get(percentile).asDouble()
-          else
-            -1.0
-        jobs.append((jobNameString, time))
+        if (node.has(percentile) && node.get(percentile) != null) {
+          val time = node.get(percentile).asDouble()
+          jobs.append((jobNameString, time))
+        }
       }
       jobs = jobs.sortBy(_._2).reverse
 
