@@ -41,7 +41,9 @@ class StatsResource @Inject()(
   // /scheduler/stats/mean
   def getPerf(@PathParam("percentile") percentile: String): Response = {
     try {
+      var output = ListBuffer[Map[String, Any]]()
       var jobs = ListBuffer[(String, Double)]()
+
       val mapper = new ObjectMapper()
       for (jobNameString <- jobGraph.dag.vertexSet()) {
         val node = mapper.readTree(jobMetrics.getJsonStats(jobNameString))
@@ -51,8 +53,11 @@ class StatsResource @Inject()(
         }
       }
       jobs = jobs.sortBy(_._2).reverse
-
-      Response.ok(jobs).build
+      for ( (jobNameString, time) <- jobs) {
+        val myMap = Map("jobNameLabel" -> jobNameString, "time" -> time / 1000.0)
+        output.append(myMap)
+      }
+      Response.ok(output).build
     } catch {
       case ex: Throwable => {
         log.log(Level.WARNING, "Exception while serving request", ex)
