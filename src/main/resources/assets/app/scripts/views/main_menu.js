@@ -4,6 +4,7 @@ define([
   'underscore',
   'views/bound_view',
   'hbs!templates/main_menu'
+  'components/bargraph'
 ],
 function($,
          Backbone,
