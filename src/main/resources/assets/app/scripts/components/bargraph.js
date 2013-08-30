@@ -6,7 +6,7 @@ function drawHorizontalBarChart(chartID, dataSet, selectString, numJobs) {
         // selectString => String that allows you to pass in
         //           a D3 select string.
         // numJobs => The number of bars to render
-        numJobs = min(dataSet.length, numJobs);
+        numJobs = Math.min(dataSet.length, numJobs);
         var canvasWidth = 700;
         var barsWidthTotal = 300
         var barHeight = 20;
