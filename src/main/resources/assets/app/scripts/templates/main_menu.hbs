@@ -31,6 +31,12 @@
   <button class="btn width clear-btn pull-right new-job">✚ New Job</button>
 </div>
 
-<div>
-  Barchart should go here.
+<div id="bar_chart">
+  <h4>Bar Chart</h4>
+  <div class="chart"></div>
 </div>
+<script>
+var jobStatsData = [{"jobNameLabel":"santa", "time": 45.01}, {"jobNameLabel": "foobar", "time": 14.21}];
+var numJobs = 10;
+drawHorizontalBarChart("jobStats", jobStatsData, "#bar_chart .chart", 10);
+</script>
