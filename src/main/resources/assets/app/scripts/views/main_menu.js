@@ -41,7 +41,7 @@ function($,
     submitSearchForm: function(e) {
       e && e.preventDefault();
       return false;
-    }
+    },
 
     drawHorizontalBarChart: function(chartID, dataSet, selectString, numJobs) {
 
