@@ -119,7 +119,7 @@ function($,
                 .style("fill", "White" )
                 .style("stroke", "White" )
                 .transition()
-    	      .ease("bounce")
+                .ease("bounce")
                   .duration(1500)
                   .delay(function(d, i) { return i * 100; })
                 .attr("width", function(d) { return x(d.time); })
