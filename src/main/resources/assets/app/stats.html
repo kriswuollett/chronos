@@ -1,0 +1,18 @@
+<html>
+<head>
+    <title>Some rudimentary statistics...</title>
+    <script src="http://mbostock.github.com/d3/d3.js?2.4.5"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
+    <script src="scripts/bargraph.js"></script>
+</head>
+<body>
+<div id="barchart">
+  <div class="chart"></div>
+  <script>
+  $.getJSON("/scheduler/stats/median", function(result) {
+      drawBarChart("jobTimes", result, "#barchart .chart", 10);
+  }
+  </script>
+</div>
+</body>
+</html>
