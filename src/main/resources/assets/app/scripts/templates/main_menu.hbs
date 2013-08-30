@@ -1,4 +1,3 @@
-<script src="scripts/components/bargraph.js"></script>
 <a class="brand" href="/">
   <h1 id="logo">Chronos</h1>
 </a>
@@ -33,7 +32,13 @@
 </div>
 
 <div id="bar_chart">
-  <h4>Bar Chart</h4>
+  <ul class="nav job-detail-nav">
+    <li class="pull-left nav-item nav-item-tooltip mean" data-toggle="tooltip" data-title="mean" data-placement="bottom">µ</li>
+    <li class="pull-left nav-item nav-item-tooltip median" data-toggle="tooltip" data-title="median" data-placement="bottom">50</li>
+    <li class="pull-left nav-item nav-item-tooltip 75th" data-toggle="tooltip" data-title="75th" data-placement="bottom">75</li>
+    <li class="pull-left nav-item nav-item-tooltip 95th" data-toggle="tooltip" data-title="95th" data-placement="bottom">95</li>
+    <li class="pull-left nav-item nav-item-tooltip 99th" data-toggle="tooltip" data-title="99th" data-placement="bottom">99</li>
+  </ul>
   <div class="chart"></div>
 </div>
 <script>
