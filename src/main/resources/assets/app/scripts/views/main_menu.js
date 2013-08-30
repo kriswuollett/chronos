@@ -162,7 +162,7 @@ function($,
                   .on('mouseover', synchronizedMouseOver)
                   .on("mouseout", synchronizedMouseOut);
 
-          };
+          }
 
   });
 
